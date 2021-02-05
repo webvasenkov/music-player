@@ -1,0 +1,21 @@
+.song {
+  &__container {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__cover {
+    width: 20%;
+    border-radius: 100%;
+  }
+
+  &__name {
+    margin: 1rem 0;
+  }
+
+  &__artist {
+  }
+}

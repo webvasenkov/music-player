@@ -1,0 +1,73 @@
+.library {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-120%);
+  transition: all 0.3s ease-in-out;
+  padding: 2rem;
+  background: white;
+  box-shadow: 2px 2px 50px gray;
+  width: 20rem;
+  height: 100%;
+  overflow: scroll;
+
+  &_open {
+    transform: translateX(0%);
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+    }
+
+    &-total-songs {
+      font-size: 0.8rem;
+      color: gray;
+    }
+  }
+
+  &__songs {
+    margin-top: 2rem;
+  }
+
+  &__song {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin: 1rem 0;
+    cursor: pointer;
+
+    &-cover {
+      width: 15%;
+      border-radius: 100%;
+      margin-right: 1rem;
+      position: relative;
+    }
+
+    &-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    &-artist {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: gray;
+    }
+
+    &-active {
+      position: absolute;
+      width: 0.5rem;
+      height: 0.5rem;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+  }
+}
