@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import './styles/app.scss';
+import data from './data';
 import { Navbar, Song, Player, Library } from './components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlay, faPause, faAngleLeft, faAngleRight, faMusic, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { chillHop as data } from './util';
 
 library.add(faPlay, faPause, faAngleLeft, faAngleRight, faMusic, faTimes);
 
@@ -18,7 +18,15 @@ function App() {
     <div className='App'>
       <Navbar setIsOpenLibrary={setIsOpenLibrary} isOpenLibrary={isOpenLibrary} />
       <Song song={currentSong} />
-      <Player song={currentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />
+      <Player
+        currentSong={currentSong}
+        setCurrentSong={setCurrentSong}
+        songs={songs}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        audioRef={audioRef}
+        setSongs={setSongs}
+      />
       <Library
         songs={songs}
         setSongs={setSongs}

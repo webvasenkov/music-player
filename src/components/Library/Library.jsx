@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Song from './Song';
+import { playSong, getNewSongs } from '../../util';
 
 const Library = ({ songs, setSongs, setCurrentSong, isPlaying, audioRef, isOpenLibrary }) => {
   const totalSongs = songs.length;
@@ -8,21 +9,9 @@ const Library = ({ songs, setSongs, setCurrentSong, isPlaying, audioRef, isOpenL
   const handleSelectSong = async (id) => {
     const selectedSong = songs.filter((song) => song.id === id)[0];
     setCurrentSong(selectedSong);
+    playSong(isPlaying, audioRef);
 
-    if (isPlaying) {
-      await audioRef.current.play();
-      audioRef.current.play();
-    }
-
-    const newSongs = songs.map((song) => {
-      if (song.id === id) {
-        return { ...song, active: true };
-      }
-
-      return { ...song, active: false };
-    });
-
-    setSongs(newSongs);
+    setSongs(getNewSongs(songs, id));
   };
 
   return (

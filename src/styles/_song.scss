@@ -13,9 +13,14 @@
   }
 
   &__name {
-    margin: 1rem 0;
+    margin: 2rem 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
   }
 
   &__artist {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgb(49, 49, 49);
   }
 }
