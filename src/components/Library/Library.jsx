@@ -24,7 +24,6 @@ const Library = ({ songs, setSongs, setCurrentSong, isPlaying, audioRef, setIsOp
   }, [songs, setCurrentSong, setSongs, isPlaying, audioRef]);
 
   const scrollHandler = (event) => {
-    console.log(event);
     const value = pixelToRem(event.target.scrollTop);
     setStickyPosition(value + 1);
   };
