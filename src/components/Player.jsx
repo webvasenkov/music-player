@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getNewSongs, getTime, playSong } from '../util';
+import { getNewSongs, getTime } from '../util';
 
 const Player = ({ audioRef, currentSong, setCurrentSong, setSongs, songs, isPlaying, setIsPlaying }) => {
   const [songInfo, setSongInfo] = useState({ currentTime: 0, duration: 0, animationPrecented: 0 });
@@ -36,40 +36,45 @@ const Player = ({ audioRef, currentSong, setCurrentSong, setSongs, songs, isPlay
     setSongInfo({ ...songInfo, currentTime });
   };
 
-  const skipTrackHandler = (duration) => {
-    playSong(isPlaying, audioRef);
+  const activeLibraryHandler = (prevNextId) => {
+    setSongs(getNewSongs(songs, prevNextId));
+  };
 
+  const skipTrackHandler = async (duration) => {
     if (duration === 'skip-forward') {
       if (currentIndex === songs.length - 1) {
-        setCurrentSong(songs[0]);
+        await setCurrentSong(songs[0]);
+        activeLibraryHandler(songs[0].id);
       } else {
-        setCurrentSong(songs[currentIndex + 1]);
+        await setCurrentSong(songs[currentIndex + 1]);
+        activeLibraryHandler(songs[currentIndex + 1].id);
       }
     }
 
     if (duration === 'skip-back') {
       if (!currentIndex) {
-        setCurrentSong(songs[songs.length - 1]);
+        await setCurrentSong(songs[songs.length - 1]);
+        activeLibraryHandler(songs[songs.length - 1].id);
       } else {
-        setCurrentSong(songs[currentIndex - 1]);
+        await setCurrentSong(songs[currentIndex - 1]);
+        activeLibraryHandler(songs[currentIndex - 1].id);
       }
     }
+
+    if (isPlaying) audioRef.current.play();
   };
 
   const songEndHandler = async () => {
     if (currentIndex === songs.length - 1) {
       await setCurrentSong(songs[0]);
+      activeLibraryHandler(songs[0].id);
     } else {
       await setCurrentSong(songs[currentIndex + 1]);
+      activeLibraryHandler(songs[currentIndex + 1].id);
     }
 
-    playSong(isPlaying, audioRef);
+    if (isPlaying) audioRef.current.play();
   };
-
-  useEffect(() => {
-    setSongs(getNewSongs(songs, currentSong.id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSong]);
 
   return (
     <div className='player'>

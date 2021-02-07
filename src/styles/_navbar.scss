@@ -32,3 +32,12 @@
     color: #fff;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    &__container {
+      justify-content: space-between;
+      padding: 2rem;
+    }
+  }
+}

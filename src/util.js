@@ -5,13 +5,6 @@ export const getTime = (time) => {
   return `${minutes}:${seconds}`;
 };
 
-export const playSong = async (isPlaying, audioRef) => {
-  if (isPlaying) {
-    await audioRef.current.play();
-    audioRef.current.play();
-  }
-};
-
 export const getNewSongs = (songs, currentSongId) => {
   return songs.map((song) => {
     if (song.id === currentSongId) {
@@ -20,4 +13,8 @@ export const getNewSongs = (songs, currentSongId) => {
 
     return { ...song, active: false };
   });
+};
+
+export const pixelToRem = (px) => {
+  return px / 16;
 };
